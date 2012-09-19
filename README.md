@@ -1,4 +1,4 @@
-Scrum_KL
+ScrumKL
 ========
 
 a scrum tool as a plugin on remdine, just for scrum!
