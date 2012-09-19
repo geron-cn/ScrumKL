@@ -1,0 +1,59 @@
+<div id="mainmenu_body">
+<div class="kl_menubar" id="mainmenu_top">
+  <ul>
+    <li>
+      <%= link_to l(:lab_product_view),{:controller=>"kl_product",:action=>"demand_list",:project_id=>@project},{:id=>"mm1",:onclick=>"showM(this,1)"} -%>
+    </li>
+    <li>
+      <%= link_to l(:lab_project_view),{:controller=>"kl_project",:action=>"index",:project_id=>@project},{:id=>"mm2",:onclick=>"showM(this,2)"} -%>
+    </li>
+	<!--
+    <li>
+      <a herf="#" id="mm3" onclick="showM(this,3)"; onmouseout="OnMouseLeft()"><%= l(:lab_project_test) -%></a>
+    </li>
+	-->
+  </ul>
+</div>
+<div id="mainmenu_bottom">
+  <div class="mainmenu_rbg">
+  <ul class="hide" id="mb1">
+    <li>
+      <%= link_to l(:lab_requirement_list),{:controller=>"kl_product",:action=>"demand_list",:project_id=>@project},{:id=>"ms1"} -%>
+    </li>
+    <li>
+      <%= link_to l(:lab_sprint_list),{:controller=>"kl_product",:action=>"sprint_list",:project_id=>@project},{:id=>"ms2"} -%>
+    </li>
+    <li>
+      <%= link_to  l(:lab_releasesprint),{:controller=>"kl_product",:action=>"publish_list",:project_id=>@project},{:id=>"ms3"} -%>
+    </li>
+    <li>
+      <a herf="#"><%= l(:lab_requirement_change) -%></a>
+    </li>
+  </ul>
+   
+  <ul class="hide" id="mb2">
+    <li>
+      <%= link_to l(:lab_sprint_backlog),{:controller=>"kl_project",:action=>"index",:project_id=>@project},{:id=>"ms4"} -%>
+    </li>
+    <li>
+      <%= link_to l(:lab_task_list),{:controller=>"kl_project",:action=>"task_list",:project_id=>@project},{:id=>"ms5"}-%>
+    </li>
+	<!--
+    <li>
+    	 <%= link_to l(:lab_chart),{:controller=>"charts",:action=>"index",:project_id=>@project},{:id=>"ms6"} -%>
+    </li>
+	-->
+    <li>
+      <a herf="#"><%= l(:lab_conference) -%></a>
+    </li>
+  </ul>
+  </div>
+</div>
+<script>
+  mmenuURL();
+</script>
+</div>
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'menu', :plugin => 'redmine_scrumkl' -%>
+  <%= javascript_include_tag 'menu', :plugin => 'redmine_scrumkl' -%>
+<% end %>

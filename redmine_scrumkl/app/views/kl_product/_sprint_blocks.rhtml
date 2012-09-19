@@ -1,0 +1,60 @@
+<p align='right'><%= collection_select(:version, :id, @sprint_list,:id,:name,{:selected=>@sprint.id},
+                      {:onChange => remote_function(:url => {:action => "sprint_blocks", :project_id => @project},
+                                                        :update=>"update_main_list",
+                                                        :with => "'value=' + this.value")} )%></p>
+<table class="list" style="border:none">
+	<tr>
+		<td>
+			<h4 style="text-align:center;">
+			<%=link_to  @sprint.name,{:controller=>"kl_project",:action=>"index",:project_id=>@project, :sprint_id=>@sprint} -%></h4>
+			<div style="text-align:right;"><%= link_to l(:lab_add_newstory), {:action => 'new_user_story', :project_id=>@project,:sprint_id=>@sprint}, :class => 'icon icon-add' %></div>
+		   <table class="sortable" class="list" style="width:100%;" id="<%= "table_sprint" %>">
+		   	<thead style="cursor:hand;">
+			 <th align="center" ><%=l(:field_name)%></th>
+			 <th align="center" ><%=l(:field_priority)%></th>
+			 <th align="center" ><%=l(:field_category)%></th>
+			 <th align="center" ><%=l(:lab_storypoint)%></th>
+			 <th align="center" ><%=l(:field_estimated_hours)%></th>
+	         <th><%=l(:lab_operation)%></th>
+			 </thead>
+			 <tbody>
+			 <% if !@sprint.fixed_issues.any?%>
+			    <tr><td><div style="height:30px"></div></td></tr>
+			 <% end %>
+			 <%@sprint.fixed_issues.each do |issue| 
+                if issue.parent_id.nil?%>
+			 <tr id="<%= "del_#{issue.id}" %>" >
+			 
+				<%if  uerstory = KlUserstory.find_by_issue_id(issue.id)%>
+			 	<td >
+			 		<div id="<%= "issue_#{issue.id}"%>" style="cursor:move">
+						<%= link_to   "##{issue.id}",{:controller => "kl_product", :action => "show_story",:project_id=>@project, :story_id =>  uerstory},
+                             :class => issue.css_classes -%>:&nbsp;<%=truncate(issue.subject,:length =>20)-%></div>
+				</td>
+					<td align="center"><%=  uerstory.priority%></td>
+					<td align="center"><%=   uerstory.category%></td>
+					<td align="center"><%=   uerstory.estimate%></td>
+				<%else%>
+				<td >
+			 		<div id="<%= "issue_#{issue.id}" %>">
+						<%= link_to   "##{issue.id}",{:controller => "issues", :action => "show",:project_id=>@project, :id => issue},
+                             :class => issue.css_classes -%>:&nbsp;<%=truncate(issue.subject,:length =>20)-%></div>
+				</td>
+				 	<td>-</td><td><%=h issue.category ? issue.category.name : "-" %></td><td>-</td>
+					<%end%>
+				<td align="center"><%= issue.estimated_hours%></td>
+				<td align="center"><%= link_to "",{:action => 'edit_user_story',:project_id=>@project,:user_story_id=>issue,:sprint_id=>@sprint},:title=>l(:button_edit),:class =>'icon icon-edit'%>&nbsp;
+		            <%= link_to "",{:action => 'delete_user_story',:project_id=>@project,:user_story_id=>issue.id,:sprint_id=>@sprint},:title=> l(:button_delete),:class =>'icon icon-del'%></td>
+			 </tr>
+			 <%= draggable_element "issue_#{issue.id}".to_sym%>
+			 <%end%>
+       <%end%>
+			 </tbody>
+		   </table>
+		 </td>
+    </tr>
+</table>
+
+<% content_for :header_tags do %>
+<%= javascript_include_tag 'sorttable',:plugin => 'redmine_scrumkl' %>
+<% end %>

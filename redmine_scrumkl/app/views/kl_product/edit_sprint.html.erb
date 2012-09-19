@@ -1,0 +1,5 @@
+<h2><%=l(:lab_edit_sprint) %></h2>
+<% labelled_tabular_form_for :version, @version, :url=>{:controller=>'kl_product',:action=>'sprint_update',:project_id=>@project, :sprint_id=>@version.id } do |f| %>
+<%= render :partial => 'kl_product/sprint_form', :locals => { :f => f } %>
+<%= submit_tag l(:button_change) %>
+<% end %>

@@ -1,0 +1,57 @@
+<div class="box" style="width:99%">
+    <%= f.error_messages %>
+    <div style="width:42%">
+    <%=error_messages_for :issue %>
+    <%fields_for :issue do |issue| %>
+    <strong><%=l(:field_title) %></strong>
+    <br/>
+    <%=issue.text_field :subject,:size=>15,:required => true %>&nbsp;
+    <br/>
+    <strong><%= issue.label l(:field_estimated_hours) %></strong>&nbsp;<%= issue.text_field :estimated_hours, :size=>15 %>
+    <br/>
+    <table style="width:80%">
+        <tr>
+            <td>
+                <strong><%=l(:field_status) %></strong>
+                &nbsp;<%=issue.select(:status_id,@status) %>
+            </td>
+            <td align="middle">
+                <strong><%=l(:field_tracker) %></strong>&nbsp;<%=issue.select(:tracker_id,@tracker) %>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <strong><%=l(:field_description) %></strong>
+    <br/>
+    <%=issue.text_area :description,:cols => 60,:rows => 5, :class => 'wiki-edit' %>
+	<table style="width:80%">
+      <tr>
+        <td>
+          <strong><%= issue.label l(:field_start_date) %></strong>:<%= issue.text_field :start_date, :size => 10, :disabled => !@issue.leaf? %><%= calendar_for('issue_start_date') if @issue.leaf? %>
+        </td>
+        <td align="middle">
+          <strong><%= issue.label l(:field_due_date) %></strong>:<%= issue.text_field :due_date, :size => 10, :disabled => !@issue.leaf? %><%= calendar_for('issue_due_date') if @issue.leaf? %>
+        </td>
+      </tr>
+    </table>
+    <%end %>
+    <br/>
+    <strong><%= f.label l(:field_priority) %></strong>
+    &nbsp;(0~40)<%= f.text_field :priority, :size=>15 %>
+    </br>
+    <br/>
+    <table style="width:80%">
+        <tr>
+            <td>
+                <strong><%= f.label l(:lab_estimate) %></strong>
+                &nbsp;<%= f.text_field :estimate, :size=>15 %>
+            </td>
+            <td align="middle">
+                <strong><%= f.label l(:lab_story_category) %></strong>
+                &nbsp;<%= f.select(:category_id, @category, :required => true) %>
+            </td>
+        </tr>
+    </table>
+</div>
+<%= wikitoolbar_for 'issue_description' %>
+</div>

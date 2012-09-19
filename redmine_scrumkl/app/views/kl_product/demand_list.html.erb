@@ -1,0 +1,106 @@
+<div id="main">
+  <%= render :partial =>"/layouts/kl_menubar" -%>
+  <div>
+    <br>
+    <% form_tag({ :controller => 'kl_project', :action => 'task_list', :project_id => @project }, :method => :get, :id => 'query_form') do %>
+    <%= hidden_field_tag 'set_filter', '1' %>
+    <div id="query_form_content" class="hide-when-print">
+      <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+        <legend onclick="toggleFieldset(this);">
+          <%= l(:label_filter_plural) %>
+        </legend>
+        <div style="<%= @query.new_record? ? "" : "display: none;"  %>">
+          <%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+        </div>
+      </fieldset>
+    </div>
+    <p class="buttons hide-when-print">
+      <%= link_to_function l(:button_apply), 'submit_query_form("query_form")', :class => 'icon icon-checked' %>
+      <%= link_to l(:button_clear), { :set_filter => 1, :project_id => @project }, :class => 'icon icon-reload' %>
+    </p>
+    <% end %>
+    <div class="main_list">
+      <div style="text-align:right;">
+        <%= link_to l(:lab_add_backlog), {:controller=>"backlog",:action => 'new',:project_id=>@project}, :class => 'icon icon-add' %>
+      </div>
+      <table class="list sortable" id="demand_list">
+        <thead style="cursor:hand; background-color:#eeeeee">
+          <tr>
+            <th>
+              <%=l(:field_name) %>
+            </th>
+            <th>
+              <%=l(:field_priority) %>
+            </th>
+            <th>
+              <%=l(:lab_story_type) %>
+            </th>
+            <th>
+              <%=l(:lab_storypoint) %>
+            </th>
+            <th>
+              <%=l(:field_status) %>
+            </th>
+            <th>
+              <%=l(:lab_creator) %>
+            </th>
+            <th>
+              <%=l(:lab_creation_time) %>
+            </th>
+            <th>
+              <%=l(:field_description) %>
+            </th>
+            <th>
+              <%=l(:lab_operation) %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <%@story_list.each do |story| %>
+          <tr class="<%= cycle('odd', 'even') %>">
+            <td>
+              <%= link_to "##{story.id}",{:controller => "kl_product", :action => "show_story",:project_id=>@project, :story_id =>story} -%>&nbsp;&nbsp;<%=story.usr_issue.subject %>
+            </td>
+            <td>
+              <%=story.priority %>
+            </td>
+            <td>
+              <%=story.category %>
+            </td>
+            <td>
+              <%=story.estimate %>
+            </td>
+            <td>
+              <%=story.usr_issue.status %>
+            </td>
+            <td>
+              <%= avatar(story.usr_issue.author, :size => "14") %><%= story.usr_issue.author_id ? link_to_user(story.usr_issue.author) : "-" %>
+            </td>
+            <td>
+              <%=story.usr_issue.created_on.strftime("%y-%m-%d") if story.usr_issue.created_on %>
+            </td>
+            <td>
+              <%=truncate(story.usr_issue.description.gsub(/<.*?>/, ''),:length =>20) if story.usr_issue.description -%>
+            </td>
+            <td>
+              <%= link_to  "",{:controller=>"backlog",:action => 'edit',:project_id=>@project,:story_id=>story},:class =>'icon icon-edit',:title=> l(:button_edit) %>&nbsp;&nbsp;<%= link_to  "",{:controller=>"backlog",:action => 'delete',:project_id=>@project,:story_id=>story},:class =>'icon icon-del',:title=> l(:button_delete) %>
+            </td>
+          </tr>
+          <%end %>
+        </tbody>
+      </table>
+      <p class="pagination">
+        <%= pagination_link @all_story_page,:url=>{:controller=>'kl_product',:action=>'demand_list',:project_id=>@project} %>
+      </p>
+    </div>
+  </div>
+  
+  <% content_for :sidebar do %>
+  <%= render :partial => "/layouts/kl_sidebar" %>
+  <% end %>
+  
+  <% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'klproduct', :plugin => 'redmine_scrumkl' -%>
+  <%= javascript_include_tag 'sorttable',:plugin => 'redmine_scrumkl' %>
+  <% end %>
+</div>

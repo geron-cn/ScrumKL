@@ -1,0 +1,7 @@
+<%form_for :klbacklog, :url=>{:controller=>:backlog,:action=>:update,:project_id => @project,:story_id=>params[:story_id]} do |f| %>
+<h1><%=l(:lab_edit_backlog) %></h1>
+<%=render :partial=>'backlog/form',:locals=>{:f=>f} %>
+<p>
+  <%= f.submit l(:permission_edit_issues) %>
+</p>
+<% end %>

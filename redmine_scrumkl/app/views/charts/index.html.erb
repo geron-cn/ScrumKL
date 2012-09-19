@@ -1,0 +1,5 @@
+<%= render :partial =>"/layouts/kl_menubar" -%>
+<%= render(:partial => "/charts/burndown_chart",:graph=>@graph, :layout => false) %>
+<% content_for :header_tags do %>
+<%= stylesheet_link_tag 'klproduct', :plugin => 'redmine_scrumkl' -%>
+<% end %>

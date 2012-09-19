@@ -1,0 +1,39 @@
+<table id="backlog" style="border:none;">
+  <tr>
+  	<% if @story_list.any? %>
+	    <%	    num=1
+	    @story_list.each do |story| %>
+	    <td class="even" valign="top" id="<%= "del_#{story.issue_id}" %>" style="width:150px" >
+	      <div align="center" id="<%= "us_#{story.issue_id}" %>"  style="border:1px;  border-style:groove;  width:80%;  left:10%; height:120px; z-index:10">
+	        <p id="<%= "usr_#{story.id}"  %>" style="cursor:move;  background-color:#9CA5FD;text-align:right;"  class="day-num">
+	          <%= h("##{story.id}") %>
+	        </p>
+	        <div class="tooltip" style="text-align:left;">
+	          <%= link_to "##{story.id}",{:controller => "issues", :action => "show", :id =>story} -%>&nbsp;&nbsp;<%=story.usr_issue.subject %>
+	          <p class="wiki">
+	            <strong><%= l(:field_description) %></strong>: 
+	            <br/>
+	            <%=h truncate(story.usr_issue.description.gsub(/<.*?>/, '')) if story.usr_issue.description %>
+	            <span class="tip"><%= render_story_tooltip story %></span>
+	          </p>
+	        </div>
+	      </div>
+	    </td>
+	    <%= draggable_element "us_#{story.issue_id}".to_sym, :handle => "'usr_#{story.id}'" %>
+	    <%if num%6==0 %>
+	  </tr>
+	  <tr>
+	    <%end
+	    num = num + 1 %>
+	    <% end %>
+	<% else %>
+	   <td><div style="width:80%;  left:10%; height:120px">&nbsp;</div></td>
+	<% end %>
+  </tr>
+</table>
+<p class="pagination">
+  <%= pagination_link_remote @story_page,{:url=>{:controller=>'kl_product',:action=>'story_blocks',:project_id=>@project},:update=>'story_update'} %>
+</p>
+<% content_for :header_tags do %>
+<%= stylesheet_link_tag 'calendar' -%>
+<% end %>

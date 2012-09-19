@@ -1,0 +1,75 @@
+zh:
+  scrumkl_caption: ScrumKL
+  lab_product_backlog: Product Backlog
+  lab_sprint_backlog:  迭代
+  lab_sprint:          迭代
+  lab_task:            任务
+  lab_userstory:       用户故事
+  lab_chart:           图表
+  lab_conference:      会议
+  lab_dashbord:        仪表盘
+  lab_sprintplan:      迭代计划
+  lab_statistics:      统计
+  lab_project_introduce: 项目介绍
+  lab_releasesprint:   迭代计划
+  lab_product_view:    产品管理
+  lab_project_view:    项目管理
+  lab_requirement_list: Product Backlog
+  lab_requirement_change: 需求变更管理
+  lab_project_test:     测试管理
+  lab_task_list:       任务列表
+  lab_product_overview: 产品概述
+  lab_vision_scope:     前景和范围
+  lab_document_mana:    文档管理
+  lab_sprint_list:     迭代列表
+  lab_storypoint:      故事点数
+  lab_agile_project_management:   敏捷项目管理系统
+  lab_end_date:        截止日期
+  lab_new_sprint:      新建迭代
+  lab_story_type:      故事类型
+  lab_creator:         创建者
+  lab_creation_time:   创建时间
+  lab_operation:       操作
+  lab_add_newstory:    新增故事
+  lab_add_backlog:     新增 Product Backlog
+  lab_story_category:  故事类别
+  lab_estimate:        故事点数
+  lab_total_estimate:  总故事点数
+  lab_story_name:      故事名
+  lab_edit_sprint:     编辑迭代
+  lab_unsloved:        未解决
+  lab_completed:       已完成
+  lab_completed_rate:  完成率
+  lab_introduce:       介绍
+  lab_project_name:    项目名称
+  lab_project_content: 项目内容
+  lab_project_target:  项目目标
+  lab_project_plan:    项目进度
+  lab_product_introduce: 产品介绍
+  lab_product_name:    产品名称
+  lab_activate_demand: 激活需求数
+  lab_change_demand:   变更需求数
+  lab_draft_demand:    草稿需求数
+  lab_closed_demand:   已关闭需求数
+  lab_publish:         公布数
+  lab_team_introduce:  团队介绍
+  lab_add_task:        新增
+  lab_edit_backlog:    编辑Product Backlog
+  lab_edit_story:      编辑故事
+  lab_edit_task:       编辑子任务
+  lab_update_rate_of_task:  更新任务进度
+  lab_view_story:     查看故事
+  lab_view_task:      查看任务
+  notice_no_sprint:    警告：当前无迭代,请新建迭代！
+  lab_button_confirm:  确认
+  lab_underway:        进行中
+  lab_feedback:        反馈中
+  lab_handle_notice:   点击进度条区域更新进度和状态
+  lab_status_notice:   状态说明
+  lab_task_name:       任务名
+  lab_story_points_left: 剩余故事点数
+  lab_story_points:    总故事点数
+  lab_story_point:     故事点数
+  lab_sprint_chart:    迭代燃尽图
+  lab_story_statistics: 故事状态
+  

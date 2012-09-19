@@ -1,0 +1,54 @@
+
+
+.main_list 
+{
+	position:relative;
+	height:auto;
+	float:right;
+	width:100%;
+}
+
+.odd
+{
+	background:#f6f7f8;
+}
+
+
+.main_list h3
+{
+	line-height:20px;
+	background:#cce8cf;
+}
+
+
+.main_list h4
+{
+	line-height:15px;
+	background:#cce8cf;
+}
+
+
+.storys
+{
+	position:relative;
+	width:100%;
+	height:auto;
+	background:#eff2f9;
+}
+
+.sprints
+{
+   position:relative;
+   width:100%;
+   padding-top:10px;
+   height:auto;
+   background:#edf1f3;
+}
+
+#demand_list{
+  width:100%; 
+  border-spacing:0; 
+  border-color:#e4e4e4; 
+  border-style:solid;
+  border-width:thin;
+}

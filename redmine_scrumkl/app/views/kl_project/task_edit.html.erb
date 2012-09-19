@@ -1,0 +1,7 @@
+<%form_for :issue, :url=>{:controller=>:kl_project,:action=>:task_update,:project_id => @project,:task_id=>params[:task_id]} do |f| %>
+<h1><%=l(:lab_edit_task) %></h1>
+<%=render :partial=>'kl_project/task_form',:locals=>{:f=>f} %>
+<p>
+  <%= f.submit l(:button_update) %>
+</p>
+<% end %>

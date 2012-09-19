@@ -1,0 +1,95 @@
+<div id="main">
+  <%= render :partial =>"/layouts/kl_menubar" -%>
+  <%= render :partial =>"/layouts/kl_leftbar" -%>
+  <div class="content_bar">
+    <h3><%= l(:lab_view_task) %></h3>
+    <div class="<%= @issue.css_classes %> details" style="background-color:#f6f6f6">
+      <%= avatar(@issue.author, :size => "50") %>
+      <div class="subject">
+        <%= render_task_with_tree(@issue) %>
+      </div>
+      <p class="author">
+        <%= authoring @issue.created_on, @issue.author %>.<% if @issue.created_on != @issue.updated_on %>
+        <%= l(:label_updated_time, time_tag(@issue.updated_on)) %>.<% end %>
+      </p>
+      <table class="attributes">
+        <tr>
+          <th class="status">
+            <%=l(:field_status) %>:
+          </th>
+          <td class="status">
+            <%= @issue.status.name %>
+          </td>
+          <th class="start-date">
+            <%=l(:field_start_date) %>:
+          </th>
+          <td class="start-date">
+            <%= format_date(@issue.start_date) %>
+          </td>
+        </tr>
+        <tr>
+          <th class="due-date">
+            <%=l(:field_due_date) %>:
+          </th>
+          <td class="due-date">
+            <%= format_date(@issue.due_date) %>
+          </td>
+        </tr>
+        <tr>
+          <th class="assigned-to">
+            <%=l(:field_assigned_to) %>:
+          </th>
+          <td class="assigned-to">
+            <%= avatar(@issue.assigned_to, :size => "14") %><%= @issue.assigned_to ? link_to_user(@issue.assigned_to) : "-" %>
+          </td>
+          <th class="progress">
+            <%=l(:field_done_ratio) %>:
+          </th>
+          <td class="progress">
+            <%= progress_bar @issue.done_ratio, :width => '80px', :legend => "#{@issue.done_ratio}%" %>
+          </td>
+        </tr>
+        <tr>
+          <% if User.current.allowed_to?(:view_time_entries, @project) %>
+          <th class="spent-time">
+            <%=l(:label_spent_time) %>:
+          </th>
+          <td class="spent-time">
+            <%= @issue.spent_hours > 0 ? (link_to l_hours(@issue.spent_hours), {:controller => 'timelog', :action => 'index', :project_id => @project, :issue_id => @issue}) : "-" %>
+          </td>
+          <% end %>
+        </tr>
+        <tr>
+          <th class="fixed-version">
+            <%=l(:field_fixed_version) %>:
+          </th>
+          <td class="fixed-version">
+            <%= @issue.fixed_version ? link_to_version(@issue.fixed_version) : "-" %>
+          </td>
+          <% if @issue.estimated_hours %>
+          <th class="estimated-hours">
+            <%=l(:field_estimated_hours) %>:
+          </th>
+          <td class="estimated-hours">
+            <%= l_hours(@issue.estimated_hours) %>
+          </td>
+          <% end %>
+        </tr>
+        <%= render_custom_fields_rows(@issue) %>
+        <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
+      </table>
+      <% if @issue.description? || @issue.attachments.any? -%>
+      <hr/><% if @issue.description? %>
+      <p>
+        <strong><%=l(:field_description) %></strong>
+      </p>
+      <div class="wiki">
+        <%= textilizable @issue, :description, :attachments => @issue.attachments %>
+      </div>
+      <% end %>
+      <% end -%>
+    </div>
+    <%=button_to_function l(:button_back),"javascript:history.back(-1)" %>
+    <% html_title "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}" %>
+  </div>
+</div>

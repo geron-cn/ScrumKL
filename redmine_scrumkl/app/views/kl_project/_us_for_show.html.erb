@@ -1,0 +1,38 @@
+<tr class="color_<%=count %>">
+    <td class="project_user_story_<%=count %>">
+    <table style="width:100%;">
+      <tr >
+        <td class="tab_us_name"><%=h user_story.usr_issue.subject %>(P<%= user_story.priority %>)
+         
+		 </td>
+		 <td style="text-align:right;">
+		 	<%= link_to l(:lab_add_task),{:controller => "kl_project", :action => "new_task", :id =>user_story.issue_id,:project_id=>@project},:class =>'icon icon-add'%> 
+		 </td>
+      </tr>
+	  <tr>
+	  	<td>
+	  	<%=l(:label_issue_status_plural)%>
+		 <%status=IssueStatus.find(user_story.usr_issue.status_id)%>
+		 <%=status.name%></td>
+		 </tr>
+      <tr>
+        <td >
+            <%= user_story.usr_issue.description -%>
+        </td>
+      </tr>
+    </table>
+    </td>
+	
+	<td class="white">
+		<table style="width:100%;">
+		 	<%ust_id=user_story.issue_id.to_i%>
+		 	<%tasks=Issue.find_all_by_parent_id(ust_id) %>
+		 	<% for task in tasks %>
+            <%= render(:partial => "/kl_project/task_view", :locals => {:task => task,:sprint_id=>sprint_id}) %>
+            <% end %>
+		</table>
+		<% if tasks.any? %>
+		   <h3></h3>
+		<% end %>
+	 </td>
+</tr>

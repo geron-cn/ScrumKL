@@ -1,0 +1,17 @@
+<div id="main">
+<%= render :partial =>"/layouts/kl_menubar" -%>
+<!-- <%= render :partial =>"/layouts/kl_leftbar" -%> -->
+<div>
+  <div class="main_list" id="update_main_list">
+    <%= render :partial =>"/kl_product/drag_update_block" -%>
+  </div>
+</div>
+</div>
+<% content_for :sidebar do %>
+<%= render :partial => "/layouts/kl_sidebar" %>
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'klproduct', :plugin => 'redmine_scrumkl' -%>
+  <%= javascript_include_tag "prototype","effects" %>
+<% end %>

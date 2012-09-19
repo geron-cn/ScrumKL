@@ -1,0 +1,66 @@
+
+<div id="main">
+<%= render :partial =>"/layouts/kl_menubar" %>
+<!-- <%= render :partial =>"/layouts/kl_leftbar" -%> -->
+<div>
+<div class="main_list">
+	<br>
+<% form_tag({ :controller => 'kl_project', :action => 'task_list', :project_id => @project }, :method => :get, :id => 'query_form') do %>
+    <%= hidden_field_tag 'set_filter', '1' %>
+		<div id="query_form_content" class="hide-when-print">
+    <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+    	<legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+    	<div style="<%= @query.new_record? ? "" : "display: none;" %>">
+    		<%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+    	</div>
+    </fieldset>
+		</div>
+    <p class="buttons hide-when-print">
+
+    <%= link_to_function l(:button_apply), 'submit_query_form("query_form")', :class => 'icon icon-checked' %>
+	<%= link_to l(:button_clear), { :set_filter => 1, :project_id => @project }, :class => 'icon icon-reload'  %>
+    </p>
+<% end %>
+
+		
+<table class="list sortable" id="task_list" style="width:100%;border-spacing:0; border-width:1; border-color:#e4e4e4; border-style:solid; border-width:thin">
+	<thead style="cursor:hand; background-color:#eeeeee">
+	<tr>
+	<th><%=l(:field_name)%></th>
+	<th><%=l(:field_assigned_to)%></th>
+	<th><%=l(:field_estimated_hours)%></th>
+	<th><%=l(:field_status)%></th>
+	<th><%=l(:field_start_date)%></th>
+	<th><%=l(:field_description)%></th>
+	<th><%=l(:lab_operation)%></th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	<%@task_list.each do |task|%>
+	<tr class="<%= cycle('odd', 'even') %>">
+	<td><%= link_to "##{task.id}",{:controller => "kl_project", :action => "show_task",:project_id=>@project, :task_id =>task}-%>&nbsp;&nbsp;<%=task.subject%></td>
+	<td><%= avatar(task.assigned_to, :size => "14") %><%= task.assigned_to ? link_to_user(task.assigned_to) : "-" %></td>
+	<td><%=task.estimated_hours%></td>
+	<td><%= task.status.name %></td>
+	<td><%=task.due_date.strftime("%y-%m-%d")if task.due_date!=nil%></td>
+	<td><%=truncate(task.description.gsub(/<.*?>/, ''),:length =>20) if task.description-%></td>
+	<td><%= link_to  "",{:controller=>"kl_project",:action => 'task_edit',:project_id=>@project,:task_id=>task},:class =>'icon icon-edit',:title=>l(:button_edit)%>&nbsp;&nbsp;
+	    <%stay="f"%>
+		<%= link_to  "",{:controller=>"kl_project",:action => 'task_delete',:project_id=>@project,:task_id=>task,:stay=>stay},:class =>'icon icon-del',:title=>l(:button_delete)%></td>
+	</tr>
+	<%end%>
+	</tbody>
+</table>
+<p class="pagination"><%= pagination_link @task_page,:url=>{:controller=>'kl_project',:action=>'task_list',:project_id=>@project} %></p>
+</div>
+</div>
+	</div>
+<% content_for :sidebar do %>
+<%= render :partial => "/layouts/kl_sidebar" %>
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'klproduct', :plugin => 'redmine_scrumkl' -%>
+  <%= javascript_include_tag 'sorttable',:plugin => 'redmine_scrumkl' %>
+<% end %>

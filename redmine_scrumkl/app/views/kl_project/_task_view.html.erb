@@ -1,0 +1,74 @@
+</table>
+<h3></h3>
+<table class="nospace" style="border-spacing:0;overflow:hidden;">
+<tr>
+	<td>
+			<tr style="height:20px;">
+				<%i=task.done_ratio%>
+				<%n=0%>
+
+				<%if task.status_id==4%>
+				<%td_style="#eef473;"%>
+				<%elsif task.status_id==3 %>
+				<%td_style="#7567f1;"%>
+				<%else %>
+				<%td_style="#6cf861;"%>
+				<%end%>
+				
+				<%while n<i %>
+				<td style=<%="width:35px;background-color:"+td_style%>>
+				<%n=n+10%>
+				<%this_title=n.to_s+'%'%>
+				<%if n==task.done_ratio %>
+				<%this_title+="（反馈）"%>
+				<%elsif n==100%>
+				<%this_title+="（已完成）"%>
+				<% else   %>
+				<%end%>
+				<%=link_to  "　　　",{:controller=>"kl_project",:action => 'task_click',:project_id=>@project,:task_id=>task,:percent=>n,:sprint=>sprint_id},:title=>this_title%>
+				</td>
+				<%end%>
+				<%while n<100 %>
+				<td style=<%="width:35px;background-color:#d7d7d7;"%>>
+				<%n=n+10%>
+				<%this_title=n.to_s+'%'%>
+				<%if n==task.done_ratio %>
+				<%this_title="反馈"%>
+				<%elsif n==100%>
+				<%this_title="已完成"%>
+				<% else   %>
+				<%end%>
+				<%=link_to  "　　　",{:controller=>"kl_project",:action => 'task_click',:project_id=>@project,:task_id=>task,:percent=>n,:sprint=>sprint_id},:title=>this_title%>
+				</td>
+				<%end%>
+				<td>
+				<%=task.done_ratio.to_s+'%'%>
+				</td>
+				<td>
+<%= collection_select( :member,:id, task.assignable_users, :id, :name, {:include_blank => true,:selected => task.assigned_to_id},
+                                {:onChange => remote_function(:url => {
+                                                        :action => "assign_to", :project_id => @project, :task_id => task.id},
+                                                        :with => "'value=' + this.value")}) %>
+</td>
+	<td>
+		<%stay="y"%>
+		<%= link_to  "",{:controller => "kl_project", :action => "show_task",:project_id=>@project, :task_id =>task},:class =>'icon icon-details',:title=>l(:button_view)%>
+		<%= link_to  "",{:controller=>"kl_project",:action => 'task_delete',:project_id=>@project,:task_id=>task,:sprint_id=>sprint_id,:stay=>stay},:class =>'icon icon-del',:title=>l(:button_delete)%>
+	</td>
+			</tr>
+    </td>
+</tr>
+</table>
+
+
+<table>
+<tr>
+	 <td> 
+    <fieldset class="collapsible collapsed">
+    	<legend onclick="toggleFieldset(this);"><%= l(:lab_task_name)+":"+task.subject %></legend>
+    	<div style="display: none;">
+    		<%= textilizable   task.description %>
+    	</div>
+    </fieldset>
+	</td>
+</tr>

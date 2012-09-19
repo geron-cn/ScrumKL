@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+
+  issue_id: 1
+
+  kl_category_id: 1
+
+  kl_sprint_id: 1
+
+  priority: 1
+
+  estimate: 1.5
+
+two:
+  id: 2
+
+  issue_id: 1
+
+  kl_category_id: 1
+
+  kl_sprint_id: 1
+
+  priority: 1
+
+  estimate: 1.5
+

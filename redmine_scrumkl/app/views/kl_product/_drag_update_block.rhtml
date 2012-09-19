@@ -1,0 +1,33 @@
+<div class="storys" id="drag_to_story">
+  <div>
+    <%= link_to_function("<h3>#{l(:lab_product_backlog)}</h3>", "Effect.toggle('story_update','blind');") %>
+  </div>
+  <div id="story_update">
+    <%=render :partial=>"/kl_product/story_blocks", :local=>{:story_list=>@story_list} %>
+  </div>
+</div>
+<%= drop_receiving_element("drag_to_story",
+:before=>visual_effect(:highlight, "story_update"),
+:url => {:controller => "kl_product", :action => "drag_update_block",:project_id=>@project,:cur_id=>@sprint.id},
+:update=>"update_main_list",
+:success=>"element.remove()",
+:with=> "'issue_id='+(element.id.split('_').last())"
+) %>
+<div class="sprints" id="drag_to_sprint">
+  <div>
+    <%= link_to_function("<h3>#{l(:lab_sprint)}</h3>", "Effect.toggle('sprint_update', 'blind');") %>
+  </div>
+  <div id="sprint_update">
+    <% unless @sprint.nil? -%>
+    <%=render :partial=>"/kl_product/sprint_blocks", :local=>{:sprint=>@sprint,:sprint_list=>@sprint_list} %>
+    <% end -%>
+  </div>
+</div>
+<%= drop_receiving_element("drag_to_sprint",
+     :before=>visual_effect(:highlight, "table_sprint"),
+     :url => {:controller => :kl_product, :action => "drag_update_block",:project_id=>@project,:sprint_id => @sprint,:cur_id=>@sprint.id},
+     :with=> "'issue_id='+(element.id.split('_').last())",
+     :update=>"update_main_list"
+     )%>
+
+

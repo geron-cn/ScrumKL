@@ -1,0 +1,45 @@
+<div class="box" style="width:100%">
+    <%= f.error_messages %>
+    <div style="width:42%">
+        <strong><%= f.label l(:field_title) %></strong>
+        <br/>
+        <%= f.text_field :subject,:size=>30,:required => true %>
+        <br/>
+        <table style="width:80%">
+            <tr>
+                <td>
+                    <strong><%= f.label l(:field_estimated_hours) %></strong>&nbsp;<%= f.text_field :estimated_hours, :size=>15 %>
+                </td>
+                <td align="middle">
+                    <strong><%= f.label l(:field_assigned_to) %></strong>&nbsp;<%= f.select(:assigned_to_id,@members,:include_blank => true, :selected =>@assigned_to_id) %>&nbsp;
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <table style="width:80%">
+            <tr>
+                <td>
+                    <strong><%= f.label l(:field_status) %></strong>&nbsp;<%= f.select(:status_id,@status) %>
+                </td>
+                <td align="middle">
+                    <strong><%= f.label l(:field_tracker) %></strong>&nbsp;<%= f.select(:tracker_id,@tracker) %>&nbsp;
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <strong><%= f.label l(:field_description) %></strong>
+        <br/>
+        <%= f.text_area :description,:cols => 60,:rows => 5, :class => 'wiki-edit' %>
+        <table style="width:80%">
+            <tr>
+                <td>
+                    <strong><%= f.label l(:field_start_date) %></strong>:<%= f.text_field :start_date, :size => 10, :disabled => !@issue.leaf? %><%= calendar_for('issue_start_date') if @issue.leaf? %>
+                </td>
+                <td align="middle">
+                    <strong><%= f.label l(:field_due_date) %></strong>:<%= f.text_field :due_date, :size => 10, :disabled => !@issue.leaf? %><%= calendar_for('issue_due_date') if @issue.leaf? %>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <%= wikitoolbar_for 'issue_description' %>
+</div>

@@ -1,0 +1,55 @@
+
+
+td.project_user_story_0{
+	display:block;
+    min-height: 500;
+	text-align:left;
+	text-overflow:ellipsis;
+	background:#e5eaf5;
+}
+
+td.project_user_story_1{
+	display:block;
+	min-height: 500;
+	text-align:left;
+	text-overflow:ellipsis;
+	background:#e5eaf5;
+}
+table.nospace{
+	border:0; 
+	cellspacing:0; 
+	cellpadding:0;
+}
+td .mid{
+	width: 7%;
+	margin-left:250px;
+}
+
+.white{
+	width: 70%;
+	background:white;
+}
+
+tr.color_0{
+	background:#e5eaf5;
+}
+
+tr.color_1{
+	background:#e5eaf5;
+}
+
+.colorgray_0{
+	background:#c0c0c0;
+}
+
+.colorgray_1{
+	
+}
+
+.task{
+	width:4px;
+	background:#c0c0c0;
+	height:10px;
+	border-style: solid;
+}
+

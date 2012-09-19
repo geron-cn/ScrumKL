@@ -1,0 +1,75 @@
+# English strings go here for Rails i18n
+en:
+  scrumkl_caption: ScrumKL
+  lab_product_backlog: Product Backlogs
+  lab_sprint_backlog: Sprint
+  lab_sprint:         Sprints
+  lab_task:            Task
+  lab_userstory:       UserStory
+  lab_chart:          Charts
+  lab_conference:      Conference
+  lab_dashbord:        Dashboard
+  lab_sprintplan:      Sprint plan
+  lab_statistics:      Statistics
+  lab_project_introduce: Project Introduce   
+  lab_releasesprint:        Release Sprint
+  lab_product_view:    Product View
+  lab_project_view:    Project View
+  lab_requirement_list: Product Backlog
+  lab_requirement_change: Requirement Change
+  lab_project_test:     Project Test
+  lab_task_list:       Task List
+  lab_sprint_list:      Sprint List
+  lab_product_overview:   Product Overview
+  lab_vision_scope:    Vision Scope
+  lab_document_mana:   Document Management
+  lab_storypoint:   Story Point
+  lab_agile_project_management:   Agile Project Management
+  lab_end_date:        End Date
+  lab_new_sprint:      New Sprint
+  lab_story_type:      Story Type
+  lab_creator:         Creator
+  lab_creation_time:   Creation Time
+  lab_operation:       Operation
+  lab_add_newstory:    Add Newstory
+  lab_add_backlog:     Add Product Backlog
+  lab_story_category:  Story Category
+  lab_estimate:        Estimate
+  lab_total_estimate:  Total Estimate
+  lab_story_name:      Story name
+  lab_edit_sprint:     Edit Sprint
+  lab_unsloved:        Edit Sprint
+  lab_completed:       Completed
+  lab_completed_rate:  Completed Rate
+  lab_introduce:       Introduce
+  lab_project_name:    Project Name
+  lab_project_content: Project Content
+  lab_project_target:  Project Target
+  lab_project_plan:    Project Plan
+  lab_product_introduce: Product Introduce
+  lab_product_name:    Product Name
+  lab_activate_demand: Activate Demand
+  lab_change_demand:   Change Demand
+  lab_draft_demand:    Draft Demand
+  lab_closed_demand:   Closed Demand
+  lab_publish:         Publish
+  lab_team_introduce:  Team Introduce
+  lab_add_task:        Add
+  lab_edit_backlog:    Edit Product Backlog
+  lab_edit_story:      Edit Story
+  lab_edit_task:       Edit Task
+  lab_update_rate_of_task:  Update Rate Of Task
+  lab_view_story:     View Story
+  lab_view_task:     View Task
+  lab_button_confirm:  Confirm
+  lab_underway:        Underway
+  lab_feedback:        Feedback
+  lab_handle_notice:   Click to update the schedule and status   
+  lab_status_notice:   Status
+  lab_task_name:       Task Name    
+  lab_story_points:    Story points
+  lab_story_points_left: Story points left
+  lab_story_point:     Story point
+  lab_sprint_chart:    Sprint Burndown Chart
+  lab_story_statistics: Story Statistics
+  

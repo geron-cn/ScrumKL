@@ -1,0 +1,79 @@
+<%= render :partial =>"/layouts/kl_menubar" %>
+<div id="kl_chart">
+	<div class="box_fieldset">
+		<div class="box_header">
+			<%= link_to_function("<h3>#{l(:lab_statistics)}</h3>", "Effect.toggle('chart_ss','blind');") %>
+		</div>
+	</div>
+	<div id="chart_ss">
+	   <% if @sprints.any? %>
+			<div class="float:right;position:relative;padding-left:5px;">
+		    <%= collection_select(:sprint, :name, @sprints, :id , :name, {:include_blank=> false,:selected=> @sprints[0].id },
+                {:onChange=> remote_function(:url=> {:controller=>'charts',:action=> 'update_sprint_chart', :project_id=> @project},
+                :with=> "'sprint_id='+ this.value", :update=> 'charts') } ) %>
+		    </div>
+			<div id="charts">
+		    	<%= render(:partial => "/charts/burndown_chart",:graph=>@graph, :layout => false)%>
+			</div>
+		<% end %>
+	</div>
+	<div class="box_fieldset" >
+		<div class="box_header">
+			 <%= link_to_function("<h3>#{l(:lab_statistics)}</h3>", "Effect.toggle('statistics','blind');") %>
+		</div>
+	</div>
+	<div id="statistics"style="display:none;">
+    	<%= render(:partial => "/charts/status_chart",:graph=>@graph_status, :layout => false)%>
+	    </div>
+	</div>
+  <div class="box_fieldset">
+		<div class="box_header">
+			 <%= link_to_function("<h3>#{l(:lab_introduce)}</h3>", "Effect.toggle('project_introduce', 'blind');") %>
+		</div>
+	</div>
+  <div id="project_introduce">
+		    <h4><%= l(:lab_project_introduce)%></h4>
+			<table class="" style="width:70%">	
+			<tr>
+				<td><%= l(:lab_project_name)%>:&nbsp;<%=link_to_project(@project)%></td>
+				<td><%= l(:lab_project_content)%>:&nbsp;&nbsp</td>
+			</tr>
+			<tr>
+				<td><%= l(:lab_project_plan)%>:&nbsp;&nbsp</td>
+				<td><%= l(:field_due_date)%>:&nbsp;&nbsp</td>
+			</tr>
+			</table>
+		    <h4><%= l(:lab_product_introduce)%></h4>
+			<table class="" style="width:70%">	
+			 <tr>
+				<td><%= l(:lab_product_name)%>:&nbsp;&nbsp</td>
+				<td><%= l(:lab_activate_demand)%>:&nbsp;&nbsp</td>
+				<td><%= l(:lab_change_demand)%>:&nbsp;&nbsp</td>
+			</tr>
+			<tr>
+				<td><%= l(:lab_draft_demand)%>:&nbsp;&nbsp</td>
+				<td><%= l(:lab_closed_demand)%>:&nbsp;&nbsp</td>
+				<td><%= l(:lab_publish)%>:&nbsp;&nbsp</td>
+			</tr>
+		    </table>
+		<% if @users_by_role.any? %>
+	  <div class="">
+		  <h4><%=l(:lab_team_introduce)%></h4>	
+		    <p><% @users_by_role.keys.sort.each do |role| %>
+        <ul>
+          <li>
+            <%=h role %>: <%= @users_by_role[role].sort.collect{|u| link_to_user u}.join(", ") %><br />
+          </li>
+        </ul>
+		    <% end %></p>
+	  </div>
+	  <% end %>
+  </div>
+<% content_for :sidebar do %>
+<%= render :partial => "/layouts/kl_sidebar" %>
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'init_list', :plugin => 'redmine_scrumkl' %>
+  <%= javascript_include_tag "prototype","effects" %>
+<% end %>

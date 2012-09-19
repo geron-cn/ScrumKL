@@ -1,0 +1,8 @@
+<%= render :partial =>"/layouts/kl_menubar" -%>
+<%form_for :user_story, :url=>{:controller=>:backlog,:action=>:create,:project_id => @project} do |f| %>
+<h3><%=l(:lab_add_backlog) %></h3>
+<%=render :partial=>'backlog/form',:locals=>{:f=>f} %>
+<p>
+  <%= f.submit l(:button_create) %>
+</p>
+<% end %>

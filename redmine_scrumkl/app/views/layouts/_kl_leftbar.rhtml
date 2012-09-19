@@ -1,0 +1,53 @@
+
+<div class="left_bar">
+	<ul id="checktree">	
+	   <li class="Closed"> 前景与范围
+		<ul>
+			<li class = "Child"><a herf="#">业务需求</a></li>
+		    <li class = "Child"><a herf="#">解决方案前景</a></li>
+			<li class = "Child"><a herf="#">范围与局限性</a></li>
+			<li class = "Child"><a herf="#">业务上下文</a></li>
+	    </ul>
+		</li>
+		
+		<li class="Closed"> 产品概述
+		<ul>
+			<li class = "Child"><a herf="#">战略目标</a></li>
+		    <li class = "Child"><a herf="#">产品简介</a></li>
+		    <li class = "Child"><a herf="#">产品发布计划</a></li>
+	    </ul>
+		</li>
+		
+		<li class="Closed"> 开发团队
+	    <ul>
+			<li class = "Child"><a herf="#">开发项目</a></li>
+		    <li class = "Child"><a herf="#">开发人员</a></li>
+	    </ul>
+		</li>
+		
+		<li class="Closed"> 组织管理
+		<ul>
+			<li class = "Child"><a herf="#">组织</a></li>
+		    <li class = "Child"><a herf="#">管理</a></li>
+	    </ul>
+		</li>
+		
+		<li class="Closed"> 多语言
+		<ul>
+			<li class = "Child"><a herf="#">中文</a></li>
+		    <li class = "Child"><a herf="#">English</a></li>
+	    </ul>
+		</li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+    var Mychecktree = new CheckTreeMenu("checktree", "li");
+    Mychecktree.InitCss("Opened", "Closed", "Child", "/plugin_assets/redmine_scrumkl/images/s.gif");
+</script>
+
+<% content_for :header_tags do %>
+   <%= stylesheet_link_tag 'kl_leftbar', :plugin => 'redmine_scrumkl' -%>
+   <%= javascript_include_tag 'checktree',:plugin => 'redmine_scrumkl' %>
+   <%= javascript_include_tag "prototype","effects" %>
+<% end %>

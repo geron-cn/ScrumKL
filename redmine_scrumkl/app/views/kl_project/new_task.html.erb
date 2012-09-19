@@ -1,0 +1,8 @@
+<%= render :partial =>"/layouts/kl_menubar" -%>
+<%form_for :issue, :url=>{:controller=>:kl_project,:action=>:task_create,:project_id => @project,:user_story_id=>params[:id]} do |f| %>
+<h3><%=l(:lab_add_task) %></h3>
+<%=render :partial=>'kl_project/task_form',:locals=>{:f=>f} %>
+<p>
+  <%= f.submit l(:button_create) %>
+</p>
+<% end %>

@@ -1,0 +1,7 @@
+<%= render :partial =>"/layouts/kl_menubar" -%>
+<h3><%=l(:lab_new_sprint)%></h3>
+
+<% labelled_tabular_form_for :version, @version, :url=>{:controller=>'kl_product',:action=>'sprint_save',:project_id=>@project} do |f| %>
+<%= render :partial => 'kl_product/sprint_form', :locals => { :f => f } %>
+<%= submit_tag l(:button_create) %>
+<% end %>

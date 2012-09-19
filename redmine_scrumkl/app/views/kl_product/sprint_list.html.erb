@@ -1,0 +1,99 @@
+<div id="main">
+  <%= render :partial =>"/layouts/kl_menubar" -%>
+  <!-- <%= render :partial =>"/layouts/kl_leftbar" -%> -->
+  <div>
+    <div>
+      <% form_tag({ :controller => 'kl_project', :action => 'task_list', :project_id => @project }, :method => :get, :id => 'query_form') do %>
+      <%= hidden_field_tag 'set_filter', '1' %>
+      <div id="query_form_content" class="hide-when-print">
+        <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+          <legend onclick="toggleFieldset(this);">
+            <%= l(:label_filter_plural) %>
+          </legend>
+          <div style="<%= @query.new_record? ? "" : "display: none;"  %>">
+            <%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+          </div>
+        </fieldset>
+      </div>
+      <p class="buttons hide-when-print">
+        <%= link_to_function l(:button_apply), 'submit_query_form("query_form")', :class => 'icon icon-checked' %>
+        <%= link_to l(:button_clear), { :set_filter => 1, :project_id => @project }, :class => 'icon icon-reload' %>
+      </p>
+      <% end %>
+    </div>
+    <div class="main_list">
+      <div style="text-align:right;">
+        <%= link_to l(:lab_new_sprint), {:controller=>"kl_product",:action => 'new_sprint',:project_id=>@project}, :class => 'icon icon-add' %>
+      </div>
+      <table class="list sortable" id="sprint_list" style="width:100%;border-spacing:0; border-width:1; border-color:#e4e4e4; border-style:solid; border-width:thin">
+        <thead style="cursor:hand; background-color:#eeeeee">
+          <tr>
+            <th>
+              <%=l(:field_name) %>
+            </th>
+            <th>
+              <%=l(:field_estimated_hours) %>/<%=l(:label_day_plural) %>
+            </th>
+            <th>
+              <%=l(:lab_end_date) %>
+            </th>
+            <th>
+              <%=l(:field_status) %>
+            </th>
+            <th>
+              <%=l(:lab_storypoint) %>
+            </th>
+            <th>
+              <%=l(:field_description) %>
+            </th>
+            <th>
+              <%=l(:lab_operation) %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <%@sprint_list.each do |sprint| %>
+          <tr class="<%= cycle('odd', 'even') %>">
+            <td>
+              <%=link_to  "##{sprint.id}",{:controller=>"kl_product",:action=>"publish_list",:project_id=>@project, :sprint_id=>sprint.id} -%>&nbsp;&nbsp;<%=sprint.name %>
+            </td>
+            <%time_c=sprint.created_on %>
+            <%date_c=Date.new(time_c.year,time_c.month,time_c.day) %>
+            <td style="text-align:center;">
+              <%=(sprint.effective_date-date_c) %>
+            </td>
+            <td style="text-align:center;">
+              <%=sprint.effective_date %>
+            </td>
+            <td>
+              <%=sprint.status %>
+            </td>
+            <td style="text-align:center;">
+              <%=KlBacklog.sum(:estimate,:conditions=>"sprint_id='#{sprint.id}'") %>
+            </td>
+            <td style="text-align:center;">
+              <%=truncate(sprint.description.gsub(/<.*?>/, ''),:length =>20) if sprint.description -%>
+            </td>
+            <td>
+              <%= link_to "",{:controller=>"kl_product",:action => 'edit_sprint',:sprint_id=>sprint.id, :project_id=>@project},:class =>'icon icon-edit',:title=> l(:button_edit) -%>&nbsp;&nbsp;<%= link_to  "",{:controller=>"kl_product",:action => 'delete_sprint',:sprint_id=>sprint.id, :project_id=>@project},:class =>'icon icon-del',:title=>l(:button_delete),:confirm=>l(:text_are_you_sure) -%>
+            </td>
+          </tr>
+          <%end %>
+        </tbody>
+      </table>
+      <p class="pagination">
+        <%= pagination_link @sprint_page,:url=>{:controller=>'kl_product',:action=>'sprint_list',:project_id=>@project} %>
+      </p>
+    </div>
+  </div>
+  
+  <% content_for :sidebar do %>
+  <%= render :partial => "/layouts/kl_sidebar" %>
+  <% end %>
+
+  <% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'klproduct', :plugin => 'redmine_scrumkl' -%>
+  <%= javascript_include_tag 'menu',:plugin => 'redmine_scrumkl' %>
+  <%= javascript_include_tag 'sorttable',:plugin => 'redmine_scrumkl' %>
+  <% end %>
+</div>
