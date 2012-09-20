@@ -1,0 +1,27 @@
+Scrum术语字典
+Scrum中文网   2008-08-20 00:36:08 作者:Ryan 来源: 文字大小:[大][中][小]
+电子书目录：
+
+1    燃尽图（Burn down Charts）
+2    每日站会（Daily Scrum Meeting）
+3    障碍（Impediments）
+4    产品Backlog(Product Backlog)
+5    产品Backlog条目（Product Backlog Item）
+6    产品backlog项的工作量（Product Backlog Item Effort）
+7    产品燃尽图（Product Burn down Chart）
+8    产品负责人的角色 （Product Owner Role）
+9    发布（Release）
+10   发布燃尽图 （Release Burn down Chart）
+11   Scrum角色（Scrum Roles）
+12   Scrum Master角色
+13   Sprint
+14   Sprint Backlog
+15   Sprint燃尽图（Sprint Burn down Chart）
+16   Sprint 目标
+17   Sprint计划会议 （Sprint Planning Meeting）
+18   Sprint评审会议（Sprint Review Meeting）
+19   Sprint任务（Sprint Task）
+20   团队（Team）
+21   团队成员（Team Member）
+22   速率（Velocity）
+ 
